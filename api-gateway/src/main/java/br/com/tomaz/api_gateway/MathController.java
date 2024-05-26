@@ -13,9 +13,7 @@ public class MathController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/sum/{numberOne}/{numberTwo}")
-    public Double sum(
-            @PathVariable("numberOne") String numberOne,
-            @PathVariable("numberTwo") String numberTwo) throws Exception {
+    public Double sum(@PathVariable String numberOne, @PathVariable String numberTwo) throws Exception {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
             throw new UnsupportedMathOperationException("Please put a numeric value");
@@ -36,10 +34,8 @@ public class MathController {
         return number.matches("[-+]?[0-9]*\\.?[0-9]+");
     }
 
-    @GetMapping("/divide/{numberOne}/{numberTwo}")
-    public Double divide(
-            @PathVariable("numberOne") String numberOne,
-            @PathVariable("numberTwo") String numberTwo) throws Exception {
+    @GetMapping("/division/{numberOne}/{numberTwo}")
+    public Double division(@PathVariable String numberOne, @PathVariable String numberTwo) throws Exception {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
             throw new UnsupportedMathOperationException("Please specify a number");
@@ -47,10 +43,10 @@ public class MathController {
         return convertToDouble(numberOne) / convertToDouble(numberTwo);
     }
 
-    @GetMapping("/multiply/{numberOne}/{numberTwo}")
-    public Double multiply(
-            @PathVariable("numberOne") String numberOne,
-            @PathVariable("numberTwo") String numberTwo) throws Exception {
+    @GetMapping("/multiplication/{numberOne}/{numberTwo}")
+    public Double multiplication(
+            @PathVariable String numberOne,
+            @PathVariable String numberTwo) throws Exception {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
             throw new UnsupportedMathOperationException("Please specify a number");
@@ -58,15 +54,21 @@ public class MathController {
         return convertToDouble(numberOne) * convertToDouble(numberTwo);
     }
 
-    @GetMapping("/subtract/{numberOne}/{numberTwo}")
-    public Double subtract(
-            @PathVariable("numberOne") String numberOne,
-            @PathVariable("numberTwo") String numberTwo) throws Exception {
+    @GetMapping("/subtraction/{numberOne}/{numberTwo}")
+    public Double subtraction(@PathVariable String numberOne, @PathVariable String numberTwo) throws Exception {
 
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
             throw new UnsupportedMathOperationException("Please specify a number");
         }
         return convertToDouble(numberOne) - convertToDouble(numberTwo);
     }
+
+    @GetMapping("/squareroot/{number}")
+    public Double squareRoot(@PathVariable String number) {
+        if (!isNumeric(number)) throw new UnsupportedMathOperationException("Please specify a number");
+
+        return Math.sqrt(convertToDouble(number));
+    }
+
 
 }
