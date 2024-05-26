@@ -1,4 +1,9 @@
 spring:
+  # set color in terminal
+  output:
+    ansi:
+      enabled: ALWAYS
+
   application:
     name: api-gateway
   datasource:
