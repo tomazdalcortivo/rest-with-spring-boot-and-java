@@ -3,6 +3,7 @@ package br.com.tomaz.api_gateway.controllers;
 
 import br.com.tomaz.api_gateway.model.Person;
 import br.com.tomaz.api_gateway.services.PersonServices;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,9 +39,9 @@ public class PersonController {
         return personServices.update(person);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         personServices.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
