@@ -17,7 +17,7 @@ public class MathController {
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo) throws Exception {
 
-        if (isNumeric(numberOne) || isNumeric(numberTwo)) {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
             throw new UnsupportedMathOperationException("Please put a numeric value");
         }
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
@@ -34,6 +34,39 @@ public class MathController {
         if (strNumber == null) return false;
         String number = strNumber.replaceAll(",", ".");
         return number.matches("[-+]?[0-9]*\\.?[0-9]+");
+    }
+
+    @GetMapping("/divide/{numberOne}/{numberTwo}")
+    public Double divide(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo) throws Exception {
+
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please specify a number");
+        }
+        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+    }
+
+    @GetMapping("/multiply/{numberOne}/{numberTwo}")
+    public Double multiply(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo) throws Exception {
+
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please specify a number");
+        }
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
+
+    @GetMapping("/subtract/{numberOne}/{numberTwo}")
+    public Double subtract(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo) throws Exception {
+
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please specify a number");
+        }
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
     }
 
 }
