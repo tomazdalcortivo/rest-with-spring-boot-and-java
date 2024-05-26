@@ -17,8 +17,8 @@ public class MathController {
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo) throws Exception {
 
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
+        if (isNumeric(numberOne) || isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please put a numeric value");
         }
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
@@ -30,12 +30,10 @@ public class MathController {
         return 0D;
     }
 
-
     private boolean isNumeric(String strNumber) {
         if (strNumber == null) return false;
         String number = strNumber.replaceAll(",", ".");
         return number.matches("[-+]?[0-9]*\\.?[0-9]+");
     }
-
 
 }

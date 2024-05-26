@@ -12,8 +12,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Date;
 
 @RestControllerAdvice
-//@ControllerAdvice
-//@RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
@@ -34,7 +32,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 
     }
 }
