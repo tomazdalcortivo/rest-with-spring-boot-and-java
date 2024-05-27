@@ -4,7 +4,7 @@ package br.com.tomaz.api_gateway.services;
 import br.com.tomaz.api_gateway.PersonRepository;
 import br.com.tomaz.api_gateway.data.vo.v1.PersonVO;
 import br.com.tomaz.api_gateway.exceptions.ResourceNotFoundException;
-import br.com.tomaz.api_gateway.mapper.DozerMapper;
+import br.com.tomaz.api_gateway.mapper.ModelMapper;
 import br.com.tomaz.api_gateway.model.Person;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class PersonServices {
     }
 
     public List<PersonVO> findAll() {
-        return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+        return ModelMapper.parseListObjects(repository.findAll(), PersonVO.class);
     }
 
     public PersonVO findById(Long id) {
@@ -32,16 +32,16 @@ public class PersonServices {
         var entity =  repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        return ModelMapper.parseObject(entity, PersonVO.class);
     }
 
 
     public PersonVO create(PersonVO person) {
         logger.info("Creating a person ");
 
-        var entity = DozerMapper.parseObject(person, Person.class);
+        var entity = ModelMapper.parseObject(person, Person.class);
 
-        return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+        return ModelMapper.parseObject(repository.save(entity), PersonVO.class);
     }
 
     public PersonVO update(PersonVO person) {
@@ -55,7 +55,7 @@ public class PersonServices {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+        return ModelMapper.parseObject(repository.save(entity), PersonVO.class);
     }
 
     public void delete(long id) {
