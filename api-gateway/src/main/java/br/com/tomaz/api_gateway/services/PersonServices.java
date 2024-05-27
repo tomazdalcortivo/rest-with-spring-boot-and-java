@@ -2,6 +2,7 @@ package br.com.tomaz.api_gateway.services;
 
 
 import br.com.tomaz.api_gateway.PersonRepository;
+import br.com.tomaz.api_gateway.controllers.PersonController;
 import br.com.tomaz.api_gateway.data.vo.v1.PersonVO;
 import br.com.tomaz.api_gateway.data.vo.v2.PersonVOV2;
 import br.com.tomaz.api_gateway.exceptions.ResourceNotFoundException;
@@ -9,6 +10,9 @@ import br.com.tomaz.api_gateway.mapper.ModelMapper;
 import br.com.tomaz.api_gateway.mapper.custom.PersonMapper;
 import br.com.tomaz.api_gateway.model.Person;
 import org.springframework.stereotype.Service;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,10 +37,12 @@ public class PersonServices {
     public PersonVO findById(Long id) {
         logger.info("Finding one person ");
 
-        var entity =  repository.findById(id)
+        var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
-        return ModelMapper.parseObject(entity, PersonVO.class);
+        PersonVO vo = ModelMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
     }
 
 
@@ -51,7 +57,7 @@ public class PersonServices {
     public PersonVO update(PersonVO person) {
         logger.info("Update a person ");
 
-        Person entity = repository.findById(person.getId())
+        Person entity = repository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
         entity.setFirstName(person.getFirstName());
