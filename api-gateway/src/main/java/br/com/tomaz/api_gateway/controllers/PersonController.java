@@ -1,7 +1,7 @@
 package br.com.tomaz.api_gateway.controllers;
 
 
-import br.com.tomaz.api_gateway.model.Person;
+import br.com.tomaz.api_gateway.data.vo.v1.PersonVO;
 import br.com.tomaz.api_gateway.services.PersonServices;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,22 +19,22 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Person findById(@PathVariable Long id) {
+    public PersonVO findById(@PathVariable Long id) {
         return personServices.findById(id);
     }
 
     @GetMapping
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         return personServices.findAll();
     }
 
     @PostMapping
-    public Person create(@RequestBody Person person) {
+    public PersonVO create(@RequestBody PersonVO person) {
         return personServices.create(person);
     }
 
     @PutMapping
-    public Person update(@RequestBody Person person) {
+    public PersonVO update(@RequestBody PersonVO person) {
         return personServices.update(person);
     }
 
