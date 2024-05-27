@@ -2,7 +2,6 @@ package br.com.tomaz.api_gateway.controllers;
 
 
 import br.com.tomaz.api_gateway.data.vo.v1.PersonVO;
-import br.com.tomaz.api_gateway.data.vo.v2.PersonVOV2;
 import br.com.tomaz.api_gateway.services.PersonServices;
 import org.springframework.http.ResponseEntity;
 import br.com.tomaz.api_gateway.util.MediaType;
@@ -37,13 +36,6 @@ public class PersonController {
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     public PersonVO create(@RequestBody PersonVO person) {
         return personServices.create(person);
-    }
-
-    @PostMapping(value = "/v2",
-            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
-            consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
-    public PersonVOV2 createV2(@RequestBody PersonVOV2 person) {
-        return personServices.createV2(person);
     }
 
     @PutMapping(
