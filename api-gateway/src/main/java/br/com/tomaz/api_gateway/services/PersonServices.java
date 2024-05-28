@@ -1,7 +1,7 @@
 package br.com.tomaz.api_gateway.services;
 
 
-import br.com.tomaz.api_gateway.PersonRepository;
+import br.com.tomaz.api_gateway.repository.PersonRepository;
 import br.com.tomaz.api_gateway.controllers.PersonController;
 import br.com.tomaz.api_gateway.data.vo.v1.PersonVO;
 import br.com.tomaz.api_gateway.exceptions.ResourceNotFoundException;
