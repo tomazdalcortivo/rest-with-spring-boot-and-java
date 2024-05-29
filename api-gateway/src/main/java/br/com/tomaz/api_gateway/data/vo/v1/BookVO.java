@@ -14,7 +14,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
 
     private Long id;
 
-    private String autor;
+    private String author;
 
     @JsonProperty("launch_date")
     private Date launchDate;
@@ -31,12 +31,12 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         this.id = id;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Date getLaunchDate() {
@@ -68,11 +68,11 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         if (this == o) return true;
         if (!(o instanceof BookVO bookVO)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(id, bookVO.id) && Objects.equals(autor, bookVO.autor) && Objects.equals(launchDate, bookVO.launchDate) && Objects.equals(price, bookVO.price) && Objects.equals(title, bookVO.title);
+        return Objects.equals(id, bookVO.id) && Objects.equals(author, bookVO.author) && Objects.equals(launchDate, bookVO.launchDate) && Objects.equals(price, bookVO.price) && Objects.equals(title, bookVO.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, autor, launchDate, price, title);
+        return Objects.hash(super.hashCode(), id, author, launchDate, price, title);
     }
 }
