@@ -32,14 +32,15 @@ public class BookService {
 
         var books = ModelMapper.parseListObjects(repository.findAll(), BookVO.class);
 
-        books.forEach(p -> p.add(linkTo(methodOn(BookController.class).findById(p.getKey())).withSelfRel()));
+        books.forEach(p -> p.add(linkTo(methodOn(BookController.class).findById(p.getId())).withSelfRel()));
         return books;
     }
 
     public BookVO findById(Long id) {
         logger.info("Finding one book ");
 
-        var entity = repository.findById(id);
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
         var vo = ModelMapper.parseObject(entity, BookVO.class);
 
@@ -53,14 +54,14 @@ public class BookService {
         var entity = ModelMapper.parseObject(bookVO, Book.class);
 
         var vo = ModelMapper.parseObject(repository.save(entity), BookVO.class);
-        vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
+        vo.add(linkTo(methodOn(BookController.class).findById(vo.getId())).withSelfRel());
         return vo;
     }
 
     public BookVO update(BookVO bookVO) {
         logger.info("Updating a book ");
 
-        Book entity = repository.findById(bookVO.getKey())
+        Book entity = repository.findById(bookVO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this id"));
 
         entity.setAutor(bookVO.getAutor());
@@ -69,7 +70,7 @@ public class BookService {
         entity.setTitle(bookVO.getTitle());
 
         var vo = ModelMapper.parseObject(repository.save(entity), BookVO.class);
-        vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
+        vo.add(linkTo(methodOn(BookController.class).findById(vo.getId())).withSelfRel());
         return vo;
     }
 

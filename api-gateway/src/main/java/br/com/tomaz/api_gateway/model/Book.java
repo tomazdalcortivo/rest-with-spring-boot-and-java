@@ -16,7 +16,7 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String autor;
 
     @Column(name = "launch_date", nullable = false)
@@ -26,7 +26,7 @@ public class Book implements Serializable {
     @Column(nullable = false, precision = 65, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false, length = 250)
+    @Column(nullable = false)
     private String title;
 
     public Book() {

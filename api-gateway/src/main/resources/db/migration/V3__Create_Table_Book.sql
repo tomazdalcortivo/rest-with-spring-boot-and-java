@@ -1,0 +1,9 @@
+﻿
+CREATE TABLE books (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   autor VARCHAR(255) NOT NULL,
+   launch_date DATETIME  NOT NULL,
+   price DECIMAL(65, 2) NOT NULL,
+   title VARCHAR(255) NOT NULL,
+   CONSTRAINT pk_books PRIMARY KEY (id)
+);
