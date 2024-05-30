@@ -1,3 +1,6 @@
+cors:
+  originPatterns: http://localhost:8080,http://localhost:8080,https://erudio.com.br
+
 spring:
   # set color in terminal
   output:
